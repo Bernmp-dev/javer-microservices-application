@@ -1,3 +1,25 @@
+server:
+  port: 8080
+
 spring:
+
   application:
     name: javer-persistence-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+
+#  flyway:
+#    url: jdbc:mysql://localhost:3306/
+#    schemas: book-service-db
+#    user: root
+#    password: root
+#    locations: classpath:db/migration
