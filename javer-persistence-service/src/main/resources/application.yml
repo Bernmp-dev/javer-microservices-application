@@ -7,7 +7,7 @@ spring:
     name: javer-persistence-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/
+    url: jdbc:mysql://localhost:3306/customer_db
     username: root
     password: root
 
@@ -17,9 +17,9 @@ spring:
     show-sql: true
     open-in-view: false
 
-#  flyway:
-#    url: jdbc:mysql://localhost:3306/
-#    schemas: book-service-db
-#    user: root
-#    password: root
-#    locations: classpath:db/migration
+  flyway:
+    url: jdbc:mysql://localhost:3306/
+    schemas: customer_db
+    user: root
+    password: root
+    locations: classpath:db/migration
