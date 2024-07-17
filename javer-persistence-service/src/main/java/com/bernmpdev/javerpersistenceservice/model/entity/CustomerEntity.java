@@ -26,4 +26,12 @@ public class CustomerEntity {
 
     @Column(name = "saldo_cc")
     private Float saldoCc;
+
+    public void updateFrom(CustomerEntity customer) {
+        this.nome = customer.getNome();
+        this.telefone = customer.getTelefone();
+        this.correntista = customer.getCorrentista();
+        this.scoreCredito = customer.getScoreCredito();
+        this.saldoCc = customer.getSaldoCc();
+    }
 }
