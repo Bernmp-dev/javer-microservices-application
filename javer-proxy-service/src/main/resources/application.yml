@@ -1,0 +1,7 @@
+server:
+  port: 8100
+
+spring:
+
+  application:
+      name: javer-proxy-service
