@@ -1,6 +1,11 @@
 server:
   port: 8000
 
+feign:
+  client:
+    username: fuser
+    password: fpassword
+
 spring:
 
   application:
