@@ -1,12 +1,13 @@
 package com.bernmpdev.javerproxyservice.proxy;
 
+import com.bernmpdev.javerproxyservice.authorization.AuthorizationConfig;
 import com.bernmpdev.javerproxyservice.model.entity.CustomerEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "javer-persistence-service", url = "http://localhost:8000/customer")
+@FeignClient(name = "javer-persistence-service", url = "http://localhost:8000/customer", configuration = AuthorizationConfig.class)
 public interface CustomerProxy {
 
     @GetMapping
