@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "javer-persistence-service", url = "http://localhost:8000/customer", configuration = AuthorizationConfig.class)
+@FeignClient(name = "javer-persistence-service", configuration = AuthorizationConfig.class)
 public interface CustomerProxy {
 
     @GetMapping

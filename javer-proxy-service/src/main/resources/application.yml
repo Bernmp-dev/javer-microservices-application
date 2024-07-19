@@ -6,7 +6,18 @@ feign:
     username: fuser
     password: fpassword
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
 spring:
 
   application:
       name: javer-proxy-service
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.bernmpdev.javerproxyservice: DEBUG
