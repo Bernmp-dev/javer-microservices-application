@@ -9,12 +9,12 @@ feign:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://javer-eureka-server:8761/eureka/
 
 spring:
 
   application:
-      name: javer-proxy-service
+    name: javer-proxy-service
 
 logging:
   level:

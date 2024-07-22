@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+
+  javer-eureka-server:
+    build:
+      context: ./javer-eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   db:
     image: mysql:8.1.0
     container_name: mysql-container
@@ -8,10 +23,46 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: customer_db
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - microservices-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  javer-persistence-service:
+    build:
+      context: ./javer-persistence-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - microservices-network
+    depends_on:
+      - db
+      - javer-eureka-server
+
+  javer-proxy-service:
+    build:
+      context: ./javer-proxy-service
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8100"
+    networks:
+      - microservices-network
+    depends_on:
+      - javer-eureka-server
+      - javer-persistence-service
+
+networks:
+  microservices-network:
+    driver: bridge
 
 volumes:
   db_data:
