@@ -8,10 +8,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
+    environment:
+      SERVER_PORT: 8761
+      HOST: javer-eureka-service
     networks:
       - microservices-network
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      test: [ "CMD", "curl", "-f", "http://javer-eureka-server:8761/actuator/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -42,8 +45,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    environment:
+      SERVER_PORT: 8000
+      FEIGN_CLIENT_USERNAME: fuser
+      FEIGN_CLIENT_PASSWORD: fpassword
+      EUREKA_HOST: javer-eureka-server
+      EUREKA_PORT: 8761
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DB: customer_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     networks:
-      - microservices-network
+        - microservices-network
     depends_on:
       - db
       - javer-eureka-server
@@ -54,6 +68,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8100:8100"
+    environment:
+      SERVER_PORT: 8100
+      FEIGN_CLIENT_USERNAME: fuser
+      FEIGN_CLIENT_PASSWORD: fpassword
+      EUREKA_HOST: javer-eureka-server
+      EUREKA_PORT: 8761
     networks:
       - microservices-network
     depends_on:

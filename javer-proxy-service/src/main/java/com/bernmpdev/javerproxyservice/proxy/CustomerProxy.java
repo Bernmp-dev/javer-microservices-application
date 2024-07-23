@@ -10,22 +10,21 @@ import java.util.List;
 @FeignClient(name = "javer-persistence-service", configuration = AuthorizationConfig.class)
 public interface CustomerProxy {
 
-    @GetMapping
+    @GetMapping("/customer")
     List<CustomerEntity> getAllCustomers();
 
-    @GetMapping("/{id}")
+    @GetMapping("/customer/{id}")
     CustomerEntity getCustomerById(@PathVariable Long id);
 
-    @PostMapping
+    @PostMapping("/customer")
     CustomerEntity createCustomer(@RequestBody CustomerEntity customer);
 
-    @PutMapping("/{id}")
+    @PutMapping("/customer/{id}")
     CustomerEntity updateCustomer(@PathVariable Long id, @RequestBody CustomerEntity customer);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/customer/{id}")
     void deleteCustomer(@PathVariable Long id);
 
-    @GetMapping("/{id}/calculateCreditScore")
+    @GetMapping("/customer/{id}/calculateCreditScore")
     Float calculateCreditScore(@PathVariable Long id);
-
 }

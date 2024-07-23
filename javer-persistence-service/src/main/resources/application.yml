@@ -1,15 +1,15 @@
 server:
-  port: 8000
+  port: ${SERVER_PORT:8000}
 
 feign:
   client:
-    username: fuser
-    password: fpassword
+    username: ${FEIGN_CLIENT_USERNAME:fuser}
+    password: ${FEIGN_CLIENT_PASSWORD:fpassword}
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://javer-eureka-server:8761/eureka/
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
 
 spring:
 
@@ -17,9 +17,9 @@ spring:
     name: javer-persistence-service
 
   datasource:
-    url: jdbc:mysql://db:3306/customer_db
-    username: root
-    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:customer_db}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
 
   jpa:
     hibernate:
@@ -28,8 +28,8 @@ spring:
     open-in-view: false
 
   flyway:
-    url: jdbc:mysql://db:3306/
-    schemas: customer_db
-    user: root
-    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/
+    schemas: ${MYSQL_DB:customer_db}
+    user: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
     locations: classpath:db/migration

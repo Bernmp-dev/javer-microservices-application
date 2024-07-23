@@ -3,7 +3,7 @@ spring:
     name: javer-eureka-server
 
 server:
-  port: 8761
+  port: ${SERVER_PORT:8761}
 
 eureka:
 
@@ -15,4 +15,4 @@ eureka:
     enable-self-preservation: false
 
   service-url:
-    defaultZone: http://javer-eureka-server:8761/eureka/
+    defaultZone: http://${HOST:localhost}:${SERVER_PORT:8761}/eureka/

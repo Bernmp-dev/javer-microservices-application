@@ -25,9 +25,4 @@ public class AuthorizationConfig {
         return (requestTemplate) -> requestTemplate
                 .header("X-Origin-Header", "javer-proxy-service");
     }
-
-    @Bean
-    public RequestInterceptor loggingRequestInterceptor() {
-        return new CustomRequestInterceptor();
-    }
 }
