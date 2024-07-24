@@ -13,6 +13,3 @@ eureka:
 
   server:
     enable-self-preservation: false
-
-  service-url:
-    defaultZone: http://${HOST:localhost}:${SERVER_PORT:8761}/eureka/

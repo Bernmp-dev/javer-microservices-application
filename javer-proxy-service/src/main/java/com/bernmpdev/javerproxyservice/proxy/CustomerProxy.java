@@ -7,24 +7,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "javer-persistence-service", configuration = AuthorizationConfig.class)
+@FeignClient(name = "javer-persistence-service", path = "/customer", configuration = AuthorizationConfig.class)
 public interface CustomerProxy {
 
-    @GetMapping("/customer")
+    @GetMapping
     List<CustomerEntity> getAllCustomers();
 
-    @GetMapping("/customer/{id}")
+    @GetMapping("/{id}")
     CustomerEntity getCustomerById(@PathVariable Long id);
 
-    @PostMapping("/customer")
+    @PostMapping
     CustomerEntity createCustomer(@RequestBody CustomerEntity customer);
 
-    @PutMapping("/customer/{id}")
-    CustomerEntity updateCustomer(@PathVariable Long id, @RequestBody CustomerEntity customer);
+    @PutMapping("/{id}")
+    CustomerEntity updateCustomer(
+            @PathVariable Long id,
+            @RequestBody CustomerEntity customer
+    );
 
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/{id}")
     void deleteCustomer(@PathVariable Long id);
 
-    @GetMapping("/customer/{id}/calculateCreditScore")
+    @GetMapping("/{id}/calculateCreditScore")
     Float calculateCreditScore(@PathVariable Long id);
 }
