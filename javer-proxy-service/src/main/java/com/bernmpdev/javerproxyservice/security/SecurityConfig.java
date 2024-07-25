@@ -30,14 +30,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> {
-                    authorize
+                .authorizeHttpRequests((authorize) -> authorize
                             .requestMatchers(HttpMethod.GET).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
                             .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
                             .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                            .anyRequest().authenticated();
-                })
+                            .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
 
