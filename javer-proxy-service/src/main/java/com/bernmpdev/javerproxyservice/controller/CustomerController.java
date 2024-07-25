@@ -2,20 +2,21 @@ package com.bernmpdev.javerproxyservice.controller;
 
 import com.bernmpdev.javerproxyservice.model.entity.CustomerEntity;
 import com.bernmpdev.javerproxyservice.proxy.CustomerProxy;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "customer")
-@Validated
 public class CustomerController {
 
+    private final CustomerProxy customerProxy;
+
     @Autowired
-    private CustomerProxy customerProxy;
+    public CustomerController(CustomerProxy customerProxy) {
+        this.customerProxy = customerProxy;
+    }
 
     @GetMapping
     public List<CustomerEntity> getAllCustomers() {
@@ -31,7 +32,7 @@ public class CustomerController {
 
     @PostMapping
     public CustomerEntity createCustomer(
-            @Valid @RequestBody CustomerEntity customer
+            @RequestBody CustomerEntity customer
     ) {
         return customerProxy.createCustomer(customer);
     }
@@ -39,7 +40,7 @@ public class CustomerController {
     @PutMapping("/{id}")
     public CustomerEntity updateCustomer(
             @PathVariable Long id,
-            @Valid @RequestBody CustomerEntity customer
+            @RequestBody CustomerEntity customer
     ) {
         return customerProxy.updateCustomer(id, customer);
     }
