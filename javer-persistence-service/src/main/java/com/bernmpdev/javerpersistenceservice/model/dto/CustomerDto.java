@@ -6,12 +6,12 @@ import com.bernmpdev.javerpersistenceservice.model.entity.CustomerEntity;
 public record CustomerDto(
         Long id,
 
-        @NotBlank(message = "Nome é obrigatório")
-        @Size(min = 2, max = 150, message = "Deve ter entre {min} e {max} carácteres")
-        @Pattern(regexp = "^[A-Za-zÀ-ú]+$", message = "Deve conter apenas letras")
+        @NotNull(message = "Nome é obrigatório")
+        @Size(min = 2, max = 150, message = "Nome deve ter entre {min} e {max} carácteres")
+        @Pattern(regexp = "^[A-Za-zÀ-ú]+$", message = "Nome deve conter apenas letras")
         String nome,
 
-        @NotEmpty(message = "CPF não pode ser vazio")
+        @NotNull(message = "CPF é obrigatório")
         @Pattern(regexp = "^[0-9]{11}$", message = "CPF deve ter 11 dígitos")
         String cpf,
 
@@ -20,7 +20,7 @@ public record CustomerDto(
         @Min(value = 100000000L, message = "Telefone deve ser um número válido")
         Long telefone,
 
-        @NotNull(message = "Correntista não pode ser nulo")
+        @NotNull(message = "Correntista é obrigatório")
         Boolean correntista,
 
         @NotNull(message = "Score de crédito é obrigatório")

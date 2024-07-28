@@ -54,7 +54,7 @@ public class CustomerController {
 
     @GetMapping("/{id}/calculateCreditScore")
     @ResponseStatus(HttpStatus.OK)
-    public Float calculateCreditScore(@PathVariable Long id) {
-        return customerService.calculateCreditScore(id);
+    public Float getCreditScore(@PathVariable Long id) {
+        return customerService.getCreditScore(id);
     }
 }

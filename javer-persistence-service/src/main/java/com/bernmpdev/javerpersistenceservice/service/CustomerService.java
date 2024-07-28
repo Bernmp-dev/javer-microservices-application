@@ -66,7 +66,7 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public Float calculateCreditScore(Long id) {
+    public Float getCreditScore(Long id) {
         CustomerEntity customer = customerRepository
                 .findById(id)
                 .orElseThrow(CustomerNotFoundException::new);
