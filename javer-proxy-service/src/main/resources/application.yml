@@ -15,9 +15,3 @@ spring:
 
   application:
     name: javer-proxy-service
-
-#logging:
-#  level:
-#    root: INFO
-#    org.springframework.web: DEBUG
-#    com.bernmpdev.javerproxyservice: DEBUG

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   javer-eureka-server:
@@ -79,6 +77,25 @@ services:
     depends_on:
       - javer-eureka-server
       - javer-persistence-service
+
+  javer-gateway-service:
+    build:
+      context: ./javer-gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      SERVER_PORT: 9000
+      EUREKA_PORT: 8761
+      EUREKA_HOST: javer-eureka-server
+      PERSISTENCE_HOST: javer-persistence-service
+      PROXY_HOST: javer-proxy-service
+    networks:
+      - microservices-network
+    depends_on:
+      - javer-eureka-server
+      - javer-persistence-service
+      - javer-proxy-service
 
 networks:
   microservices-network:
