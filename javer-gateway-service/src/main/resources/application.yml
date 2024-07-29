@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:9000}
+
+spring:
+  application:
+    name: javer-gateway-service
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: persistence-service
+            uri: lb://${PERSISTENCE_HOST:javer-persistence-service}
+            predicates:
+              - Path=/persistence/**
+            filters:
+              - RewritePath=/persistence/(?<segment>.*), /${segment}
+
+          - id: proxy-service
+            uri: lb://${PROXY_HOST:javer-proxy-service}
+            predicates:
+              - Path=/proxy/**
+            filters:
+              - RewritePath=/proxy/(?<segment>.*), /${segment}
+
+    discovery:
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
