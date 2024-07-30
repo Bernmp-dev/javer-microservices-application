@@ -13,7 +13,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -30,12 +29,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().authenticated()
-                )
                 .httpBasic(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new OriginCheckFilter(), BasicAuthenticationFilter.class);
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html/**",
+                                "/v3/api-docs/**",
+                                "/actuator/**")
+                        .permitAll()
+                        .anyRequest().authenticated()
+                );
 
         return http.build();
     }
