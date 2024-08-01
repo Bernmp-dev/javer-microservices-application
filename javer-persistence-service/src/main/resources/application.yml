@@ -17,7 +17,8 @@ spring:
     name: javer-persistence-service
 
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:customer_db}
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:customer_db}
+    url: jdbc:mysql://javer-database-service-01.c5gakwa0kw9x.sa-east-1.rds.amazonaws.com:3306/javer_db
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:root}
 
@@ -28,8 +29,10 @@ spring:
     open-in-view: false
 
   flyway:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/
-    schemas: ${MYSQL_DB:customer_db}
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/
+#    schemas: ${MYSQL_DB:customer_db}
+    url: jdbc:mysql://javer-database-service-01.c5gakwa0kw9x.sa-east-1.rds.amazonaws.com:3306/
+    schemas: ${MYSQL_DB:javer_db}
     user: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:root}
     locations: classpath:db/migration

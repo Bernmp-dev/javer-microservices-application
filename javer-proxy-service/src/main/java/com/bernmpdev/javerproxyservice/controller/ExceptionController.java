@@ -1,7 +1,6 @@
 package com.bernmpdev.javerproxyservice.controller;
 
 import feign.FeignException;
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,7 +50,6 @@ public class ExceptionController {
                 );
     }
 
-    @Data
     public static class ResponseBuilder {
         private HttpStatus status;
         private List<String> messages;
@@ -67,7 +65,7 @@ public class ExceptionController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, String> errors = objectMapper.readValue(errorMessage, HashMap.class);
-            errors.forEach((_, message) -> messages.add(message));
+            errors.forEach((element, message) -> messages.add(message));
         } catch (IOException e) {
             messages.add(errorMessage);
         }
