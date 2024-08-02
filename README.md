@@ -2,7 +2,7 @@
 
 ## Proposta do Projeto
 
-Este projeto é uma aplicação baseada em microserviços para a gestão dos serviços do banco Javer. A arquitetura de microserviços permite escalabilidade, manutenibilidade e distribuição independente de cada serviço.
+Este projeto é uma aplicação baseada em microserviços para a gestão de clientes do banco Javer. A arquitetura de microserviços permite escalabilidade, manutenibilidade e distribuição independente de cada serviço.
 
 ## Ferramentas Utilizadas
 
@@ -100,6 +100,33 @@ Este projeto é uma aplicação baseada em microserviços para a gestão dos ser
       ```
 
 </details>
+
+## Rodando a Aplicação através do Terminal
+
+<details>
+  <summary>Clique para expandir</summary>
+
+### Passo a Passo
+
+**Pré-requisitos:** Certifique-se de ter o MySQL na porta ```3306```, instalado localmente ou rodando através de um container Docker.
+
+1. Clone o repositório:
+   ```bash
+   git clone <URL do repositório>
+   cd javer-microservices-application
+   ```
+2. Navegue até o diretório do microserviço que deseja iniciar, por exemplo:
+   ```bash
+   cd javer-eureka-server
+   ```
+3. Compile e execute o microserviço com Maven:
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+   ```
+4. Repita os passos 2 e 3 para cada microserviço que deseja iniciar.
+</details>
+
 
 ## Testando os Endpoints com Insomnia
 
