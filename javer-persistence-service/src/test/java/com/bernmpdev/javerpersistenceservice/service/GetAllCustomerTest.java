@@ -41,8 +41,8 @@ public class GetAllCustomerTest {
         var result = customerService.getAllCustomers();
 
         Mockito.verify(
-                customerRepository,
-                Mockito.times(1))
+                        customerRepository,
+                        Mockito.times(1))
                 .findAll();
 
         assertThat(result).isNotNull();
@@ -75,9 +75,8 @@ public class GetAllCustomerTest {
                 .when(customerRepository.findAll())
                 .thenThrow(new RuntimeException());
 
-        assertThrows(RuntimeException.class, () -> {
-            customerService.getAllCustomers();
-        });
+        assertThrows(RuntimeException.class, () ->
+                customerService.getAllCustomers());
 
         Mockito.verify(
                         customerRepository,
@@ -90,9 +89,9 @@ public class GetAllCustomerTest {
     void getAllCustomers_NullFieldsHandling() {
 
         List<CustomerEntity> customerEntityList = CustomerMock.CustomerEntityList();
-        customerEntityList.getFirst().setNome(null);
-        customerEntityList.getFirst().setTelefone(null);
-        customerEntityList.getFirst().setCorrentista(null);
+        customerEntityList.get(0).setNome(null);
+        customerEntityList.get(0).setTelefone(null);
+        customerEntityList.get(0).setCorrentista(null);
 
         Mockito
                 .when(customerRepository.findAll())
@@ -107,8 +106,8 @@ public class GetAllCustomerTest {
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(customerEntityList.size());
-        assertThat(result.getFirst().nome()).isNull();
-        assertThat(result.getFirst().telefone()).isNull();
-        assertThat(result.getFirst().correntista()).isNull();
+        assertThat(result.get(0).nome()).isNull();
+        assertThat(result.get(0).telefone()).isNull();
+        assertThat(result.get(0).correntista()).isNull();
     }
 }
