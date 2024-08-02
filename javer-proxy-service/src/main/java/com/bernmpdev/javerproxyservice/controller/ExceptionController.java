@@ -76,7 +76,7 @@ public class ExceptionController {
         List<String> messages = new ArrayList<>();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, String> errors = objectMapper.readValue(errorMessage, new HashMap<String, String>().getClass());
+            Map<String, String> errors = objectMapper.readValue(errorMessage, HashMap.class);
             errors.forEach((element, message) -> messages.add(message));
         } catch (IOException e) {
             messages.add(errorMessage);

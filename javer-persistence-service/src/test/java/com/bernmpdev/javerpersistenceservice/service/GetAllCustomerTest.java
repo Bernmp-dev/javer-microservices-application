@@ -90,9 +90,9 @@ public class GetAllCustomerTest {
     void getAllCustomers_NullFieldsHandling() {
 
         List<CustomerEntity> customerEntityList = CustomerMock.CustomerEntityList();
-        customerEntityList.getFirst().setNome(null);
-        customerEntityList.getFirst().setTelefone(null);
-        customerEntityList.getFirst().setCorrentista(null);
+        customerEntityList.get(0).setNome(null);
+        customerEntityList.get(0).setTelefone(null);
+        customerEntityList.get(0).setCorrentista(null);
 
         Mockito
                 .when(customerRepository.findAll())
@@ -107,8 +107,8 @@ public class GetAllCustomerTest {
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(customerEntityList.size());
-        assertThat(result.getFirst().nome()).isNull();
-        assertThat(result.getFirst().telefone()).isNull();
-        assertThat(result.getFirst().correntista()).isNull();
+        assertThat(result.get(0).nome()).isNull();
+        assertThat(result.get(0).telefone()).isNull();
+        assertThat(result.get(0).correntista()).isNull();
     }
 }

@@ -17,25 +17,25 @@ services:
       timeout: 10s
       retries: 3
 
-  db:
-    image: mysql:8.1.0
-    container_name: mysql-container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
-      MYSQL_DATABASE: customer_db
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - microservices-network
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+#  db:
+#    image: mysql:8.1.0
+#    container_name: mysql-container
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_ALLOW_EMPTY_PASSWORD: true
+#      MYSQL_DATABASE: customer_db
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - db_data:/var/lib/mysql
+#    networks:
+#      - microservices-network
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
 
   javer-persistence-service:
     build:
@@ -49,15 +49,15 @@ services:
       FEIGN_CLIENT_PASSWORD: fpassword
       EUREKA_HOST: javer-eureka-server
       EUREKA_PORT: 8761
-      MYSQL_HOST: db
+      MYSQL_HOST: javer-database-service-01.c5gakwa0kw9x.sa-east-1.rds.amazonaws.com
       MYSQL_PORT: 3306
-      MYSQL_DB: customer_db
+      MYSQL_DB: javer_db
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     networks:
       - microservices-network
     depends_on:
-      - db
+#      - db
       - javer-eureka-server
 
   javer-proxy-service:
@@ -101,5 +101,5 @@ networks:
   microservices-network:
     driver: bridge
 
-volumes:
-  db_data:
+#volumes:
+#  db_data:
