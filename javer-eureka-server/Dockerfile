@@ -1,14 +1,20 @@
-FROM openjdk:22-jdk-slim
-WORKDIR /javer-eureka-server
+FROM maven:3.6.3-openjdk-17-slim AS build
+WORKDIR /app
 
-RUN apt-get update && apt-get install -y maven
+COPY pom.xml .
+COPY mvnw .
+COPY .mvn .mvn
 
-COPY . .
+RUN mvn dependency:go-offline -B
+
+COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-RUN ls -l target/
+FROM eclipse-temurin:17-jre-alpine
 
-RUN cp target/*.jar javer-eureka-server.jar
+WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "javer-eureka-server.jar"]
+COPY --from=build /app/target/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
