@@ -55,7 +55,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     networks:
-        - microservices-network
+      - microservices-network
     depends_on:
 #      - db
       - javer-eureka-server
